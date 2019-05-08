@@ -1,0 +1,8 @@
+import sx.distribucionx.Surtido
+
+model {
+	Iterable<Surtido> surtidoList
+}
+
+json tmpl.surtido(surtidoList ?: [])
+

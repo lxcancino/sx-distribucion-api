@@ -1,0 +1,7 @@
+import sx.distribucionx.Surtido
+
+model {
+	Surtido surtido
+}
+
+json tmpl.surtido(surtido)
