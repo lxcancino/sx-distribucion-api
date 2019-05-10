@@ -4,4 +4,10 @@ model {
 	Surtido surtido
 }
 
-json g.render(surtido, [resolveTemplate: false])
+json g.render(surtido, [excludes: ['facturo'], resolveTemplate: false]){
+    facturo g.render(surtido.facturo)
+
+}
+
+
+
