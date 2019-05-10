@@ -22,7 +22,13 @@ class SurtidoService {
     def getFacturas(){
         println "Obteniendo Facturas"
         sql  = new Sql(dataSource)
-        def facturas = sql.rows("select * from venta where cuenta_por_cobrar_id is not null and puesto is null and surtido is false")
+        def query ="""
+            select id,documento,nombre,
+            (select count(*) from venta_det d where d.venta_id = v.id ) as partidas,
+            (select count(*) from venta_det d join instruccion_corte i on (d.id=i.venta_det_id) where d.venta_id = v.id ) as cortes
+            from venta v where cuenta_por_cobrar_id is not null and puesto is null and surtido is false
+        """
+        def facturas = sql.rows(query)
         return facturas
     }
 
