@@ -77,9 +77,9 @@ class Surtido {
     String estado
 
 
-    List cortes =[]
+    List<Corte> cortes =[]
 
-    List auxiliares= []
+    List<AuxiliarCorte> auxiliares= []
 
 
     static hasMany = [cortes:Corte,auxiliares :AuxiliarSurtido]
