@@ -28,6 +28,7 @@ class User implements Serializable {
     String email
     String sucursal
     String puesto
+    String nip
 
     Set<Role> getAuthorities() {
         (UserRole.findAllByUser(this) as List<UserRole>)*.role as Set<Role>
@@ -36,7 +37,7 @@ class User implements Serializable {
     static constraints = {
         password nullable: false, blank: false, password: true
         username nullable: false, blank: false, unique: true
-
+        nip nullable: true
         email nullable:true,email:true
         numeroDeEmpleado nullable:true
         sucursal nullable:true,maxSize:20

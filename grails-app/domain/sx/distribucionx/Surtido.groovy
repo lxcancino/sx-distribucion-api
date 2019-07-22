@@ -76,13 +76,20 @@ class Surtido {
 
     String estado
 
+    User autorizo
+
+    Date dateCreated
+    Date lastUpdated
+
 
     List<Corte> cortes =[]
 
     List<AuxiliarCorte> auxiliares= []
 
+    List<SurtidoDet> parciales= []
 
-    static hasMany = [cortes:Corte,auxiliares :AuxiliarSurtido]
+
+    static hasMany = [cortes:Corte,auxiliares :AuxiliarSurtido, parciales: SurtidoDet]
 
 
     static constraints = {
@@ -111,6 +118,10 @@ class Surtido {
         cancelo nullable: true
         cortes nullable: true
         auxiliares nullable: true
+        folioFac nullable:true
+        facturo nullable:true
+        parciales nullable: true
+        autorizo nullable: true
 
     }
 
@@ -118,6 +129,7 @@ class Surtido {
         id generator: 'uuid'
         auxiliares cascade: "all-delete-orphan"
         cortes cascade: "all-delete-orphan"
+        parciales cascade: "all-delete-orphan"
     }
 
 }

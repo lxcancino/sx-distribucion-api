@@ -4,8 +4,12 @@ model {
 	Surtido surtido
 }
 
-json g.render(surtido, [excludes: ['facturo'], resolveTemplate: false]){
+json g.render(surtido, [excludes: ['facturo', 'cortes','parciales','autorizo'], resolveTemplate: false]){
+    autorizo g.render(surtido.autorizo)
     facturo g.render(surtido.facturo)
+    asignado g.render(surtido.asignado)
+    parciales g.render(surtido.parciales)
+    
 
 }
 

@@ -1,0 +1,7 @@
+import sx.distribucionx.MesaEmpaque
+
+model {
+	MesaEmpaque mesaEmpaque
+}
+
+json tmpl.mesaEmpaque(mesaEmpaque)

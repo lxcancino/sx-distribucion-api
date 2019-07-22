@@ -1,0 +1,8 @@
+import sx.distribucionx.EntregaParcial
+
+model {
+	Iterable<EntregaParcial> entregaParcialList
+}
+
+json tmpl.entregaParcial(entregaParcialList ?: [])
+

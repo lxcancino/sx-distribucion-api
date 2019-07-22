@@ -1,0 +1,14 @@
+import sx.distribucionx.MesaEmpaque
+
+model {
+	MesaEmpaque mesaEmpaque
+}
+
+ json g.render(mesaEmpaque,[excludes:['cortador']]){
+	 cortador {
+		 id mesaEmpaque.cortador.id
+		 nombre mesaEmpaque.cortador.nombre
+	 }
+
+ }
+ 

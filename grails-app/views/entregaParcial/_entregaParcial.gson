@@ -1,0 +1,22 @@
+import sx.distribucionx.EntregaParcial
+
+model {
+	EntregaParcial entregaParcial
+}
+
+json g.render(entregaParcial, [excludes:['facturo','autorizo','partidas'],resolveTemplate: false]){
+		//facturo g.render(entregaParcial.facturo)
+		autorizo {
+			id entregaParcial.autorizo.id
+			nombre entregaParcial.autorizo.nombre
+		}
+		facturo {
+			id entregaParcial.facturo.id
+			nombre entregaParcial.facturo.nombre
+		}
+		partidas g.render(entregaParcial.partidas)
+		
+	
+
+	
+}

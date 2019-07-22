@@ -8,6 +8,8 @@ class AsignacionActividad {
 
     User asigno
 
+    User termino
+
     User	empleado
 
     String	actividad
@@ -20,14 +22,14 @@ class AsignacionActividad {
 
     String	comentario
 
-    Date	date_created
-
-    Date	last_updated
-
-    Integer	version	 = 0
+ 
 
     static constraints = {
-        actividad inList:['DESCARGAR','BARRER','CONTAR','LIMPIAR','ACOMODAR','COMIDA','PERMISO','OTRAS']
+        actividad inList: ['DESCARGA','SECTOR','BARRER','SALIDA SUCURSAL']
+        inicio nullable: true
+        termino nullable: true
+        fin nullable: true
+        comentario nullable: true
     }
 
     static mapping ={

@@ -1,0 +1,7 @@
+import sx.distribucionx.EntregaParcial
+
+model {
+	EntregaParcial entregaParcial
+}
+
+json tmpl.entregaParcial(entregaParcial)

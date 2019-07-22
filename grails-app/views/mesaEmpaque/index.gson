@@ -1,0 +1,8 @@
+import sx.distribucionx.MesaEmpaque
+
+model {
+	Iterable<MesaEmpaque> mesaEmpaqueList
+}
+
+json tmpl.mesaEmpaque(mesaEmpaqueList ?: [])
+

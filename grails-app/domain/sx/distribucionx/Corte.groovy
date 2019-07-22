@@ -10,6 +10,10 @@ class Corte {
 
     String descripcion
 
+    String origen
+
+    String instruccion
+
     User	cortador
 
     User	empacador
@@ -32,6 +36,19 @@ class Corte {
 
     String  estado
 
+    Long factura
+
+    Long venta
+
+    BigDecimal cantidad
+
+    Boolean parcial = false
+
+    Boolean parcializado = false
+
+    Date dateCreated
+    Date lastUpdated
+
     List    auxiliares = []
 
     static belongsTo = [surtido: Surtido]
@@ -48,11 +65,16 @@ class Corte {
         empacadoFin nullable: true
         empacadoInicio nullable: true
         cancelado nullable: true
-        asignacion nullable: true
         auxiliares nullable: true
+        origen nullable: true
+        instruccion nullable:true
+        factura nullable:true
+        venta nullable:true
+        cantidad nullable:true
     }
 
     static mapping = {
+        id generator:'uuid'
         auxiliares cascade: "all-delete-orphan"
         cancelado type:'date'
     }
