@@ -25,37 +25,25 @@ class CorteController extends RestfulController {
         def corte = Corte.get(id)
         def surtido = corte.surtido
 
-        if (!params.cortadoresId) {
+        println params
+
+        def cortJSON = request.JSON
+        def parcial = cortJSON.sum{new BigDecimal(it.cantidad)}
+       
+        if (!cortJSON) {
             respond new Error(error: true, message: 'Seleccion un cortador', status: 500)
             return
         }
 
-        /*
-        if(!nip){
-           
-            respond new Error(error: true, message: 'Digite su NIP', status: 500)
-            return
-        }
-        def user = User.findByNip(nip)
-        if(!user){
-           respond new Error(error: true, message: 'Operador no encontrado', status: 500)
-           return
-        }
-        if(!user.getAuthorities().find{it.authority=='ROLE_SUPERVISOR_SURTIDO'}){
-            respond new Error(error: true, message: "No tiene el ROL de SUPERVISOR_SURTIDO verifique su NIP ", status: 500)
-        }
-        */
-
-        if (params.cortadoresId) {
-            def cortadoresList = params.cortadoresId.tokenize(',')   
-            cortadoresList.each{ cor ->
+            cortJSON.each{ cor ->
                 println cor
-                def cortador = User.get(cor)
+                def cortador = User.get(cor.id)
                 println cortador.nombre
                 def corteParcial = new Corte(corte.properties)
                 corteParcial.parcial = true
                 corteParcial.asignado = new Date()
                 corteParcial.cortador = cortador
+                corteParcial.cantidadParcial = new BigDecimal(cor.cantidad)
                 corteParcial.inicio = null
                 corteParcial.fin = null
                 corteParcial.empacadoInicio = null
@@ -64,8 +52,10 @@ class CorteController extends RestfulController {
                 surtido.addToCortes(corteParcial)
             }
             corte.parcializado = true
+            corte.cantidadParcial = corte.cantidad - parcial
+
             surtido.save failOnError:true, flush:true
-        }
+        
 
         respond corte
     }

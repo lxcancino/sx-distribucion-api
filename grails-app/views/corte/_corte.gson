@@ -1,0 +1,9 @@
+import sx.distribucionx.Corte
+
+model {
+	Corte corte
+}
+
+json g.render(corte, [excludes: ['cortador'], resolveTemplate: false]){  
+ cortador corte.cortador?.nombre
+}

@@ -30,6 +30,7 @@ class UrlMappings {
         "/entregaEnvio"(controller: "surtido", action: 'entregaEnvio', method: 'GET')
         "/proceso"(controller: "surtido", action: 'enProceso', method: 'GET')
         "/buscador"(controller: "surtido", action: 'buscador', method: 'GET')
+        "/buscadorAdmin"(controller: "surtido", action: 'buscadorAdmin', method: 'GET')
          "/buscar"(controller: "surtido", action: 'buscarPorDocumento', method: 'GET')
 
        

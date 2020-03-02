@@ -1,0 +1,8 @@
+import sx.distribucionx.Corte
+
+model {
+	Iterable<Corte> corteList
+}
+
+json tmpl.corte(corteList ?: [])
+

@@ -77,8 +77,7 @@ environments:
   development:
     dataSource:
       dbCreate: update
-      url: jdbc:mysql://10.10.1.229/siipapx_tacuba?autoReconnect=true
-      #url: jdbc:mysql://${JDBC_CONNECTION_STRING}?autoReconnect=true
+      url: jdbc:mysql://10.10.1.101/siipapx?autoReconnect=true
       username: root
       password: sys
   test:
@@ -93,7 +92,8 @@ environments:
   production:
     dataSource:
       dbCreate: none
-      url: jdbc:mysql://${JDBC_CONNECTION_STRING}?autoReconnect=true
+      url: jdbc:mysql://siipapx-callcenter.c5ytspu7anln.us-east-1.rds.amazonaws.com/siipapx?autoReconnect=false
+      #url: jdbc:mysql://${JDBC_CONNECTION_STRING}?autoReconnect=true
       username: root
       password: sys
       properties:

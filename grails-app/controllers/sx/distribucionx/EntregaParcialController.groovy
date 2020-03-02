@@ -86,14 +86,12 @@ class EntregaParcialController extends RestfulController {
         // println 'Working ...'
         def surtidoJson =  request.JSON
 
-         println surtidoJson
-
         def emp = User.get(params.empId)
 
 
         def user = User.get(params.userId)
 
-        println "------"+emp+"   "+user
+ 
 
         if(!user){
             respond new Error(error: true, message: 'Operador no encontrado', status: 500)
@@ -143,8 +141,6 @@ class EntregaParcialController extends RestfulController {
 
     def buscarPendientes(EntregaParcial entrega){
         //def entrega = EntregaParcial.get(entregaId)
-
-        println "**** Entrega *****"
         if(!entrega){
            respond new Error(error: true, message: 'No existe la entrega', status: 500) 
            return

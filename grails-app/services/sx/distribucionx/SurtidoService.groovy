@@ -11,7 +11,7 @@ import sx.security.User
 @Transactional
 class SurtidoService {
 
-      @Autowired
+    @Autowired
     @Qualifier('dataSource')
     def dataSource
 
@@ -60,9 +60,10 @@ class SurtidoService {
 
     def getTransformaciones(){
         sql = new Sql(dataSource)
-         
+         println "Buscando transformaciones"
          def query = """
                 select documento as doc_principal, id,tipo,comentario,comentario as nombre,documento,fecha,
+                'LOCAL' as entrega_local,
                 (select count(*) from transformacion_det d where d.transformacion_id = t.id) as prods
                 from transformacion t where surtido is false and tipo ='TRS' and cancelado is null
                 order by 1 desc
@@ -77,7 +78,8 @@ class SurtidoService {
         def query = """
             select t.documento as doc_principal,t.id , tipo, u.nombre,'ENVIO' as entregaLocal,t.documento,tipo as tipo_de_venta,t.fecha,s.documento as folio_sol,
             (select count(*) from traslado_det d where  d.traslado_id = t.id) as prods,
-             (select count(*) from traslado_det d where  d.traslado_id = t.id and cortes_instruccion is not null) as prodsCorte,
+            (select count(*) from traslado_det d where  d.traslado_id = t.id and cortes_instruccion is not null) as prodsCorte,
+            (select count(*) from traslado_det d where  d.traslado_id = t.id and cortes_instruccion is not null) as cortes,
             (select sum(kilos) from traslado_det d where d.traslado_id = t.id) as kilos,
             s.clasificacion_vale as clasificacionVale
             from traslado t join solicitud_de_traslado s on (t.solicitud_de_traslado_id = s.id) join sucursal u on (u.id = s.sucursal_solicita_id)
@@ -317,10 +319,18 @@ class SurtidoService {
             break
             
         }
-
-
     }
 
+    def getBusqueda(String id, tipo){
+         sql = new Sql(dataSource) 
+         def queryPartidas = """
+                select p.clave, p.descripcion, d.cantidad, d.kilos
+                from venta_det d join producto p on (d.producto_id = p.id)  
+                where venta_id = ? and p.clave not in ('CORTE','MANIOBRA','MANIOBRAF')
+            """
+         def partidas = sql.rows(queryPartidas,[id])
+         return partidas
+    }
 
    
 }

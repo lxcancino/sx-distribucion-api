@@ -42,6 +42,8 @@ class Corte {
 
     BigDecimal cantidad
 
+    BigDecimal cantidadParcial
+
     Boolean parcial = false
 
     Boolean parcializado = false
@@ -71,6 +73,7 @@ class Corte {
         factura nullable:true
         venta nullable:true
         cantidad nullable:true
+        cantidadParcial nullable: true
     }
 
     static mapping = {

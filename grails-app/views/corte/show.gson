@@ -1,0 +1,7 @@
+import sx.distribucionx.Corte
+
+model {
+	Corte corte
+}
+
+json tmpl.corte(corte)

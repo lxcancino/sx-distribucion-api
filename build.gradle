@@ -90,6 +90,8 @@ dependencies {
     compile 'org.liquibase:liquibase-core:3.5.5'
     compile 'org.grails.plugins:database-migration:3.0.4'
 
+    compile 'com.google.firebase:firebase-admin:6.8.1'
+
 }
 
 bootRun {

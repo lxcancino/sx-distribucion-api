@@ -260,10 +260,39 @@ class SurtidoController extends RestfulController<Surtido> {
     }
 
     def buscador(Long folio) { 
+    
         if (folio) {
-            def query = Surtido.findAll("from Surtido where folioFac = ? or documento = ?    ",[folio,folio])
-            if(query)
-                respond query
+            println "Buscando Folio: "+ folio
+            def surtido = Surtido.find("from Surtido where folioFac = ? or documento = ?    ",[folio,folio])
+            if(surtido){
+                if(surtido.tipo == 'FAC' || surtido.tipo == 'PST'  ){
+                   def operacion = surtidoService.getOperacion( surtido.origen , 'FACS' )
+
+                   println operacion
+                }
+                respond surtido
+            }
+                
+            else
+                return []
+        }
+        else {
+            return []
+        }
+    }
+
+     def buscadorAdmin(Long folio) { 
+         println "Buscando Folio Desde Admin: "+ folio
+        if (folio) {
+            
+            def surtido = Surtido.find("from Surtido where folioFac = ? or documento = ?    ",[folio,folio])
+            if(surtido){
+                
+                def partidas = surtidoService.getBusqueda(surtido.origen, 'FAC')
+                def cortes = Corte.findAllBySurtido(surtido)
+                respond (surtido: surtido, partidas: partidas, cortes: cortes)
+            }
+                
             else
                 return []
         }
